@@ -30,6 +30,7 @@
 
             }]
         };
+        
 
         // Configuración del gráfico
         const config = {
@@ -37,6 +38,7 @@
             data: data,
             options: {
                 responsive: true,
+                maintainAspectRatio: false, //tuve que agregar esto porque sino el gráfico se me hacia todo el tiempo pequeño
                 plugins: {
                     legend: {
                         position: 'top',
@@ -44,7 +46,12 @@
                     tooltip: {
                         callbacks: {
                             label: function (tooltipItem) {
-                                let message = `${tooltipItem.label}: ${tooltipItem.raw} kg`;
+                                let note = '';
+                                if(tooltipItem.raw>8){
+                                        note = 'Producción insuficiente'
+                                }
+                                                                   
+                                let message = `${tooltipItem.label}: ${tooltipItem.raw} kg. ${note}`;
 
                                 return message
 
